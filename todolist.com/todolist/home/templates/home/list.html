@@ -1,0 +1,178 @@
+{% extends 'home/base.html' %}
+
+{% block title %}View List{% endblock %}
+
+{% block style %}
+  body {
+      font-family: 'Roboto Mono', monospace; /* Monospaced font for terminal vibe */
+      background-color: #1e1e1e; /* Dark terminal background */
+      color: #c5c8c6; /* Light gray text for readability */
+      margin: 0;
+      padding: 15px; /* Reduced padding for less space */
+      line-height: 1.4; /* Reduced line height for better density */
+  }
+
+  h1, h2 {
+      font-size: 1.4rem; /* Reduced size for both h1 and h2 */
+      margin-bottom: 10px;
+      color: #00bfff; /* Blue color matching button color */
+      border-bottom: 2px solid #373b41; /* Subtle underline */
+      padding-bottom: 5px;
+  }
+
+  ul {
+      list-style: none;
+      padding: 0;
+  }
+
+  li {
+      display: flex;
+      align-items: center; /* Align checkbox and text */
+      font-size: 0.9rem; /* Smaller text size */
+      padding: 8px 12px; /* Reduced padding for more compact list items */
+      margin: 4px 0; /* Slightly smaller margin */
+      background-color: #2d2d2d; /* Darker background for list items */
+      color: #8abeb7; /* Soft cyan text */
+      border: 1px solid #373b41; /* Subtle border for separation */
+      border-radius: 4px; /* Slight rounding for a modern look */
+      transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  li:hover {
+      background-color: #373b41; /* Slightly lighter on hover */
+      transform: translateY(-2px); /* Subtle lift effect */
+  }
+
+  li:active {
+      transform: translateY(0); /* Reset on click */
+  }
+
+  input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      width: 20px; /* Slightly smaller checkbox */
+      height: 20px; /* Slightly smaller checkbox */
+      margin-right: 8px; /* Reduced space between checkbox and text */
+      background: none;
+      border: 2px solid #555; /* Subtle border */
+      border-radius: 6px; /* Rounded corners for a futuristic feel */
+      cursor: pointer;
+      position: relative;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  input[type="checkbox"]:checked {
+      border-color: #00bfff; /* Futuristic blue color */
+      box-shadow: 0 0 8px #00bfff, inset 0 0 8px #00bfff; /* Glow effect */
+  }
+
+  input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      width: 10px; /* Smaller inner square */
+      height: 10px; /* Smaller inner square */
+      background-color: #00bfff; /* Blue filled square */
+      border-radius: 2px; /* Slightly rounded inner square */
+      transition: transform 0.2s ease;
+  }
+
+  input[type="checkbox"]:focus {
+      outline: none;
+      box-shadow: 0 0 4px 2px rgba(0, 191, 255, 0.5); /* Subtle focus outline */
+  }
+
+  .save-button {
+      margin-top: 15px; /* Reduced margin */
+      padding: 10px 20px; /* Smaller padding */
+      font-size: 1rem; /* Slightly smaller font size */
+      font-weight: bold;
+      background: linear-gradient(90deg, #1e90ff, #00bfff); /* Gradient background */
+      color: #ffffff; /* White text for contrast */
+      border: none;
+      border-radius: 5px; /* Less rounded for a more rectangular look */
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 0 10px rgba(30, 144, 255, 0.4); /* Subtle shadow and glow */
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+  }
+
+  .save-button:hover {
+      transform: scale(1.05); /* Slight zoom on hover */
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3), 0 0 15px rgba(30, 144, 255, 0.6); /* Stronger shadow and glow */
+      background: linear-gradient(90deg, #00bfff, #1e90ff); /* Reverse gradient on hover */
+  }
+
+  .save-button:active {
+      transform: scale(0.95); /* Subtle shrink effect on click */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(30, 144, 255, 0.6); /* Reduced shadow on click */
+  }
+
+  input[type="text"] {
+      font-size: 0.9rem; /* Smaller text size */
+      padding: 6px 8px; /* Reduced padding */
+      margin-top: 10px;
+      background-color: #2d2d2d;
+      color: #c5c8c6;
+      border: 1px solid #373b41;
+      border-radius: 4px;
+      width: calc(100% - 20px); /* Ensure consistent width */
+  }
+
+  input[type="text"]:focus {
+      outline: none;
+      border-color: #00bfff;
+      box-shadow: 0 0 4px #00bfff;
+  }
+  .button {
+    display: inline-block;
+    margin-top: 15px; /* Matches save-button margin */
+    padding: 10px 20px; /* Matches save-button padding */
+    font-size: 1rem; /* Matches save-button font size */
+    font-weight: bold; /* Matches save-button font weight */
+    background: linear-gradient(90deg, #1e90ff, #00bfff); /* Gradient background */
+    color: #ffffff; /* White text for contrast */
+    text-decoration: none; /* No underline */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 0 10px rgba(30, 144, 255, 0.4); /* Subtle shadow and glow */
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.button:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3), 0 0 15px rgba(30, 144, 255, 0.6); /* Stronger shadow and glow */
+    background: linear-gradient(90deg, #00bfff, #1e90ff); /* Reverse gradient on hover */
+}
+
+.button:active {
+    transform: scale(0.95); /* Subtle shrink effect on click */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(30, 144, 255, 0.6); /* Reduced shadow on click */
+}
+{% endblock %}
+
+{% block content %}
+  <form method="post" action="#">
+      {% csrf_token %}
+      {% for lss in ls %}
+          <h1>{{ lss.name }}</h1>
+          <ul>
+              {% for item in lss.item_set.all %}
+                  <li>
+                      <input type="checkbox" value="clicked" name="c{{ item.id }}" {% if item.complete %}checked{% endif %}>
+                      {{ item.text }}
+                  </li>
+              {% endfor %}
+          </ul>
+      {% endfor %}
+      <button class="save-button" type="submit" name="save" value="save">Save</button>
+      <input type="text" name="new" placeholder="Add a new item">
+      <button class="save-button" type="submit" name="newItem" value="newItem">Add Item</button>
+      <button class="save-button" type="submit" name="delete" value="delete">Delete</button>
+      <a href="/" class="button">Back</a>
+  </form>
+{% endblock %}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}todolist website{% endblock %}</title>
+    <style>
+        h1.header{
+            font-size: 3rem; /* Reduced size for both h1 and h2 */
+            margin-bottom: 10px;
+            color: #00bfff; /* Blue color matching button color */
+            border-bottom: 2px solid #373b41; /* Subtle underline */
+            padding-bottom: 5px;
+        }
+        {% block style %}{% endblock %}
+    </style>
+</head>
+<body>
+    <h1 class="header">TODOLIST</h1>
+    <div id="content" name="content">
+    {% block content %}
+    {% endblock %}
+    </div>
+</body>
+</html>
